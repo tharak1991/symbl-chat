@@ -11,9 +11,9 @@ var server = app.listen(5000, function() {
 
 var io = socket(server);
 
-// Global variables to hold all usernames and rooms created
+// general variables to hold all usernames and rooms created
 var usernames = {};
-var rooms = ["global", "chess", "video-games"];
+var rooms = ["general", "symbl", "random"];
 
 io.on("connection", function(socket) {
 
@@ -22,14 +22,14 @@ io.on("connection", function(socket) {
   socket.on("createUser", function(username) {
     socket.username = username;
     usernames[username] = username;
-    socket.currentRoom = "global";
-    socket.join("global");
-    socket.emit("updateChat", "INFO", "You have joined global room");
+    socket.currentRoom = "general";
+    socket.join("general");
+    socket.emit("updateChat", "INFO", "You have joined general room");
     socket.broadcast
-      .to("global")
-      .emit("updateChat", "INFO", username + " has joined global room");
+      .to("general")
+      .emit("updateChat", "INFO", username + " has joined general room");
     io.sockets.emit("updateUsers", usernames);
-    socket.emit("updateRooms", rooms, "global");
+    socket.emit("updateRooms", rooms, "general");
   });
 
 

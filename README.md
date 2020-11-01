@@ -1,4 +1,4 @@
-# Multi-room Chat Application
+# Chat Application
 
 A multi-user multi-room chat application built with nodejs and socket.io.
 

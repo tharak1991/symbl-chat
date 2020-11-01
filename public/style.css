@@ -17,7 +17,7 @@ h2 {
 }
 
 h2 span {
-  color: cornflowerblue;
+  color: #4B0082;
 }
 
 #chat-display {
@@ -35,7 +35,7 @@ h2 span {
 
 #msg p span {
   color: #039be5;
-  color: cornflowerblue;
+  color: #4B0082;
 }
 
 input {
@@ -48,7 +48,7 @@ input {
 }
 
 button {
-  background: cornflowerblue;
+  background: #4B0082;
   color: #fff;
   font-size: 14px;
   border: 0;
@@ -58,14 +58,14 @@ button {
 
 #create-room {
   background-color: #f0f4ff;
-  color: cornflowerblue;
+  color: #4B0082;
   border-radius: 5px;
   padding: 2px 6px 2px 6px;
   cursor: pointer;
 }
 
 #sidebar {
-  background-color: cornflowerblue;
+  background-color: #4B0082;
   padding: 5px;
 }
 
