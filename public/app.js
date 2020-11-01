@@ -1,3 +1,5 @@
+
+
 var socket = io.connect("http://localhost:5000");
 
 var userlist = document.getElementById("userlist");
@@ -8,7 +10,8 @@ var createRoomBtn = document.getElementById("create-room");
 var messages = document.getElementById("msg");
 var chatDisplay = document.getElementById("chat-display");
 
-var currentRoom = "global";
+var currentRoom = "general";
+
 
 // Send message on button click
 sendMessageBtn.addEventListener("click", function () {

@@ -7,6 +7,8 @@ const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const message_route = require('./routes/message.route');
 
+let User = require('./data/user'); 
+
 var app = express();
 
 app.use(express.static("public"));
@@ -16,6 +18,9 @@ var server = app.listen(5000, function() {
 });
 
 var io = socket(server);
+
+
+let users = [];
 
 // general variables to hold all usernames and rooms created
 var usernames = {};
@@ -31,6 +36,12 @@ io.on("connection", function(socket) {
     socket.currentRoom = "general";
     socket.join("general");
     socket.emit("updateChat", "INFO", "You have joined general room");
+    
+    let user = new User(username,'','','');
+    users.push(user);
+
+    console.log(users);
+
     socket.broadcast
       .to("general")
       .emit("updateChat", "INFO", username + " has joined general room");
