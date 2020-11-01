@@ -1,5 +1,11 @@
 var express = require("express");
 var socket = require("socket.io");
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const morgan = require('morgan');
+const compression = require('compression');
+const cookieParser = require('cookie-parser');
+const message_route = require('./routes/message.route');
 
 var app = express();
 
@@ -34,6 +40,7 @@ io.on("connection", function(socket) {
 
 
   socket.on("sendMessage", function(data) {
+    console.log(socket);
     io.sockets
       .to(socket.currentRoom)
       .emit("updateChat", socket.username, data);
@@ -49,6 +56,7 @@ io.on("connection", function(socket) {
 
 
   socket.on("updateRooms", function(room) {
+
     socket.broadcast
       .to(socket.currentRoom)
       .emit("updateChat", "INFO", socket.username + " left room");
@@ -67,5 +75,29 @@ io.on("connection", function(socket) {
     io.sockets.emit("updateUsers", usernames);
     socket.broadcast.emit("updateChat", "INFO", socket.username + " has disconnected");
   });
+
+
+app.use(morgan('dev'));
+app.use(bodyParser.json({
+    limit: '50mb',
+    extended: true,
+}));
+app.use(bodyParser.urlencoded({
+    extended: false,
+    parameterLimit: 100000,
+    limit: '50mb',
+}));
+app.use(compression());
+app.use(cookieParser());
+app.use(cors());
+
+// app.use('/room/', room_route);
+app.use('/message/', message_route);
+
+// app.use('*', (req, res) => {
+//     res.sendStatus(404);
+// });
+
+
 
 });
