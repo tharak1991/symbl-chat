@@ -10,6 +10,7 @@ var createRoomBtn = document.getElementById("create-room");
 var messages = document.getElementById("msg");
 var chatDisplay = document.getElementById("chat-display");
 
+
 var currentRoom = "general";
 
 
@@ -45,6 +46,8 @@ socket.on("updateChat", function(username, data) {
     messages.innerHTML +=
       "<p><span><strong>" + username + ": </strong></span>" + data + "</p>";
   }
+
+  socket.emit("updatUserChat"); 
 
   chatDisplay.scrollTop = chatDisplay.scrollHeight;
 });
