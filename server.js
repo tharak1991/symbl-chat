@@ -39,10 +39,10 @@ io.on('connection', function (socket) {
     socket.join('general');
 
     if (socket.username) {
-      let room_status = ' joined ';
-      let user_status = socket.username + room_status + socket.currentRoom + ' room ';
+      let room_status = 'joined';
+      let user_status = socket.username + '' + room_status +  + '' + socket.currentRoom + ' room ';
       let user = new User(socket.username, socket.currentRoom, room_status,
-        user_status,'', '');
+        user_status,' just joined ', '','');
       socket.emit('updateChat', 'INFO', 'You have joined general room');
       messageService.logUserChats(user);
     }
@@ -58,10 +58,10 @@ io.on('connection', function (socket) {
   socket.on('sendMessage', function (data) {
 
     if (socket.username) {
-      let room_status = ' sent message ';
-      let user_status = socket.username + room_status + socket.currentRoom + ' room ';
+      let room_status = 'sent message';
+      let user_status = socket.username +  + '' + room_status  + '' +  socket.currentRoom + ' room ';
       let user = new User(socket.username, socket.currentRoom, room_status,
-        user_status, data, '');
+        user_status, data, '','');
       messageService.logUserChats(user);
     }
 

@@ -6,3 +6,20 @@ exports.getAllUserChats = () => {
     return  user_chats ;   
 }
 
+// exports.getAllUsers= () => {
+//     const users =  message_service.getAllUsers() ;
+//     console.log(users);
+//     return  users ;   
+// }
+
+
+exports.getAllRoomChats= () => {
+    const chats =  message_service.getAllRoomChats() ;
+    return  chats ;   
+}
+
+
+exports.getRoomState= (room) => {
+    const state =  message_service.getRoomState(room) ;
+    return  state ;   
+}
