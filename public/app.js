@@ -47,7 +47,7 @@ socket.on("updateChat", function(username, data) {
       "<p><span><strong>" + username + ": </strong></span>" + data + "</p>";
   }
 
-  socket.emit("updatUserChat"); 
+  // socket.emit("updatUserChat"); 
 
   chatDisplay.scrollTop = chatDisplay.scrollHeight;
 });

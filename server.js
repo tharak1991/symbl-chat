@@ -37,15 +37,15 @@ io.on('connection', function (socket) {
     usernames[username] = username;
     socket.currentRoom = 'general';
     socket.join('general');
-    socket.emit('updateChat', 'INFO', 'You have joined general room');
 
-    //logic
-    if (username) {
-      let user = new User(username, socket.currentRoom, 'joined',
-        username + ' joined ' + socket.currentRoom + ' room ', '');
+    if (socket.username) {
+      let room_status = ' joined ';
+      let user_status = socket.username + room_status + socket.currentRoom + ' room ';
+      let user = new User(socket.username, socket.currentRoom, room_status,
+        user_status,'', '');
+      socket.emit('updateChat', 'INFO', 'You have joined general room');
       messageService.logUserChats(user);
     }
-
 
     socket.broadcast
       .to('general')
@@ -56,6 +56,15 @@ io.on('connection', function (socket) {
 
 
   socket.on('sendMessage', function (data) {
+
+    if (socket.username) {
+      let room_status = ' sent message ';
+      let user_status = socket.username + room_status + socket.currentRoom + ' room ';
+      let user = new User(socket.username, socket.currentRoom, room_status,
+        user_status, data, '');
+      messageService.logUserChats(user);
+    }
+
 
     io.sockets
       .to(socket.currentRoom)
@@ -79,37 +88,15 @@ io.on('connection', function (socket) {
       .emit('updateChat', 'INFO', socket.username + ' left room');
     socket.leave(socket.currentRoom);
 
-    //logic
-    if (socket.username) {
-      let user = new User(socket.username, socket.currentRoom, 'left', '',
-        socket.username + ' left ' + socket.currentRoom + ' room ', '');
-      messageService.logUserChats(user);
-    }
-
     socket.currentRoom = room;
     socket.join(room);
     socket.emit('updateChat', 'INFO', 'You have joined ' + room + ' room');
-
-    if (socket.username) {
-      let user = new User(socket.username, socket.currentRoom, 'joined', '',
-        socket.username + ' joined ' + socket.currentRoom + ' room ', '');
-      messageService.logUserChats(user);
-    }
 
     socket.broadcast
       .to(room)
       .emit('updateChat', 'INFO', socket.username + ' has joined ' + room + ' room');
   });
-  
-   //logic
-   socket.on('updatUserChat', function () {
-    if (socket.username) {
-      let user = new User(socket.username, socket.currentRoom, 'online',
-      socket.username + ' chatting in ' + socket.currentRoom + ' room ', '');
-      messageService.logUserChats(user);
-    }  
-   });
-  
+
   socket.on('disconnect', function () {
     delete usernames[socket.username];
     io.sockets.emit('updateUsers', usernames);

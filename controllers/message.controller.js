@@ -1,11 +1,8 @@
+let message_service = require('./../service/message.service') ;
 
-// let users = [];
 
+exports.getAllUserChats = () => {
+    const user_chats =  message_service.getAllUserChats() ;
+    return  user_chats ;   
+}
 
-// exports.getFinalData = body => {
-//     return {};
-// };
-
-// exports.createUser = () => {
-
-// }
