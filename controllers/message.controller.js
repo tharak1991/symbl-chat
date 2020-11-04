@@ -23,3 +23,9 @@ exports.getRoomState= (room) => {
     const state =  message_service.getRoomState(room) ;
     return  state ;   
 }
+
+exports.getlikelihood = (user_name) => {
+    const user_likelihood =  message_service.getLikelihood(user_name) ;
+    return  user_likelihood ;   
+}
+

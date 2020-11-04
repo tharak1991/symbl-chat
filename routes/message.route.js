@@ -28,6 +28,20 @@ routes.get("/state/:name", async (req, res, next) => {
 });
 
 
+routes.get("/likelihood/:user_name", async (req, res, next) => {
+    try {
+        let user_name = req.params.user_name ;
+        const user_likelihood = await message_controller.getlikelihood(user_name);
+        await res.status(200).json({status: true,
+            user_likelihood: user_likelihood
+        });
+    } catch (error) {
+        console.error(error);
+        next();
+    }
+});
+
+
 // routes.get("/users", async (req, res, next) => {
 //     try {
 //         const users = await message_controller.getAllUsers();
