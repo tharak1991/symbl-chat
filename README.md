@@ -4,13 +4,12 @@ A multi-user multi-room chat application built with nodejs and socket.io.
 
 <img src="chat-app.png" />
 
-Inspired from - http://psitsmike.com/2011/10/node-js-and-socket-io-multiroom-chat-tutorial/
-
 Features:
  - Multiple users can chat together in real-time
  - Users can create new rooms
  - Users can join/leave different rooms
  - All users get notified when a user joins/leaves their current room 
+ - Apis (Get state of a room, Get likelihood of user sending message in 1 minute)
 
 To install dependency:
 
@@ -18,8 +17,12 @@ To install dependency:
 
 To run app:
 
-`node server`
+`npm start`
 
 Open your browser and go to:
 
 `localhost:5000`
+
+Test case:
+
+`npm test`

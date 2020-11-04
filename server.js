@@ -1,5 +1,5 @@
-var express = require('express');
-var socket = require('socket.io');
+const express = require('express');
+const socket = require('socket.io');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -10,23 +10,23 @@ let User = require('./data/user');
 let userData = require('./data/user-data');
 let messageService = require('./service/message.service');
 
-var app = express();
+const app = express();
 
 app.use(express.static('public'));
 
-var server = app.listen(5000, function () {
+const server = app.listen(5000, function () {
   console.log('Listening to port 5000.');
 });
 
-var io = socket(server);
+const io = socket(server);
 
 
 let users = [];
 userData.chat_data = [];
 
 // general variables to hold all usernames and rooms created
-var usernames = {};
-var rooms = ['general', 'symbl', 'random'];
+let usernames = {};
+let rooms = ['general', 'symbl', 'random'];
 
 io.on('connection', function (socket) {
 
@@ -40,9 +40,9 @@ io.on('connection', function (socket) {
 
     if (socket.username) {
       let room_status = 'joined';
-      let user_status = socket.username + '' + room_status +  + '' + socket.currentRoom + ' room ';
+      let user_status = socket.username + '' + room_status + +'' + socket.currentRoom + ' room ';
       let user = new User(socket.username, socket.currentRoom, room_status,
-        user_status,' just joined ', '','');
+        user_status, ' just joined ', '', '');
       socket.emit('updateChat', 'INFO', 'You have joined general room');
       messageService.logUserChats(user);
     }
@@ -59,9 +59,9 @@ io.on('connection', function (socket) {
 
     if (socket.username) {
       let room_status = 'sent message';
-      let user_status = socket.username +  + '' + room_status  + '' +  socket.currentRoom + ' room ';
+      let user_status = socket.username + +'' + room_status + '' + socket.currentRoom + ' room ';
       let user = new User(socket.username, socket.currentRoom, room_status,
-        user_status, data, '','');
+        user_status, data, '', '');
       messageService.logUserChats(user);
     }
 
@@ -118,13 +118,12 @@ io.on('connection', function (socket) {
   app.use(cookieParser());
   app.use(cors());
 
-  // app.use('/room/', room_route);
   app.use('/message/', message_route);
 
-  // app.use('*', (req, res) => {
-  //     res.sendStatus(404);
-  // });
+  app.use('*', (req, res) => {
+    res.sendStatus(404);
+  });
 
-
+  exports.server = server;
 
 });

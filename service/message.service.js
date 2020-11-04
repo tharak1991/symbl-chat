@@ -1,9 +1,6 @@
 let userData = require('./../data/user-data');
-let User = require('./../data/user');
-
 
 userData.chat_data = [];
-
 
 
 exports.logUserChats = (user) => {
@@ -22,10 +19,10 @@ exports.getLikelihood = (user_name) => {
 }
 
 
-
 exports.getAllUserChats = (user) => {
     return userData.chat_data;
 }
+
 
 getState = (key = 'general') => {
     return userData.chat_data.filter(user => user.chat_room == key)
@@ -59,16 +56,10 @@ getProbability = (user_name) => {
 
 }
 
-// exports.getAllUsers = (user) => {
-//     //return userData.chat_data.filter(user => user.room_status == 'joined');
-//     return getUsers('general');
-// }
 
 exports.getAllRoomChats = (room = 'general') => {
     return getChats(room);
 }
-
-
 
 
 getChats = (key = 'general') => {
