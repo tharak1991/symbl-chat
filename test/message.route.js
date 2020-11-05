@@ -1,6 +1,7 @@
 //Require the dev-dependencies
 let chai = require('chai');
 let chaiHttp = require('chai-http');
+var expect = chai.expect;
 let server = require('./../server');
 let should = chai.should();
 
@@ -28,7 +29,7 @@ describe("/GET state", () => {
             .request('http://localhost:5000')
             .get('/message/state/a')
 
-        expect(res.status).to.equal(200)
+        expect(res.status).to.equal(200);
 
     })
 
