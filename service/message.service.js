@@ -32,6 +32,14 @@ getState = (key = 'general') => {
 
 getProbability = (user_name) => {
 
+    if (userData.chat_data.length == 0) {
+        return {
+            likelihood: 'nil',
+            user_name: user_name,
+            status: 'No users in channels'
+        };
+    }
+
     let likelihood = 'low';
     let status = 'user is not seen online in past 2 minutes';
 
@@ -40,19 +48,30 @@ getProbability = (user_name) => {
         .sort((user1, user2) => user2.timestamp - user1.timestamp)
         .map(user => user)[0];
 
-    if (current_timestamp - last_seen.timestamp < 120) {
-        likelihood = 'high';
-        status = 'user is seen online in past 2 minutes';
+    if (last_seen) {
+
+        if (current_timestamp - last_seen.timestamp < 120) {
+            likelihood = 'high';
+            status = 'user is seen online in past 2 minutes';
+        }
+
+        return {
+            likelihood: likelihood,
+            status: status,
+            user_name: user_name,
+            last_seen: last_seen.time,
+            last_msg: last_seen.msg,
+            last_room: last_seen.chat_room
+        }
+
+    } else {
+        return {
+            likelihood: 'nil',
+            user_name: user_name,
+            status: 'No user in given username'
+        };
     }
 
-    return {
-        likelihood: likelihood,
-        status: status,
-        user_name: user_name,
-        last_seen: last_seen.time,
-        last_msg: last_seen.msg,
-        last_room: last_seen.chat_room
-    }
 
 }
 
