@@ -26,7 +26,7 @@ exports.getAllUserChats = (user) => {
 
 getState = (key = 'general') => {
     return userData.chat_data.filter(user => user.chat_room == key)
-        .sort((user1, user2) => user2.timestamp - user1.timestamp)
+        .sort((user1, user2) => user1.timestamp - user2.timestamp)
         .map(user => user.user_name + ' : ' + user.msg + ' at ' + user.time);
 }
 
@@ -47,6 +47,8 @@ getProbability = (user_name) => {
     const last_seen = userData.chat_data.filter(user => user.user_name == user_name)
         .sort((user1, user2) => user2.timestamp - user1.timestamp)
         .map(user => user)[0];
+
+     //logic: if user is last seen inside 2 minutes,likelihood will be high
 
     if (last_seen) {
 

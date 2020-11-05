@@ -1,4 +1,7 @@
-//Require the dev-dependencies
+/**
+ * Test cases for the apis
+ */
+
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 var expect = chai.expect;
@@ -8,20 +11,9 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
-/*
- * Test the /GET route
+/**
+ * api : /message/state/:room_name
  */
-// describe('/GET state', () => {
-//     it('it should GET the state of the user', (done) => {
-//         chai.request(server)
-//             .get('/message/state/a')
-//             .end((err, res) => {
-//                 res.should.have.status(200);
-//                 done();
-//             });
-//     });
-// });
-
 describe("/GET state", () => {
 
     it("should return status 200", async () => {
@@ -45,9 +37,12 @@ describe("/GET state", () => {
             expect(res.body.should.have.keys('status', 'room_state'));
 
         })
-})
+});
 
 
+/**
+ * api : /message/likelihood/:user_name
+ */
 describe("/GET likelihood", () => {
 
     it("should return status 200", async () => {

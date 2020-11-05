@@ -38,7 +38,9 @@ const server = app.listen(port, function () {
 const io = socket(server);
 socket_route.start(io);
 
-
+/**
+ * Api Route
+ */
 app.use('/message/', message_route);
 
 app.use('*', (req, res) => {

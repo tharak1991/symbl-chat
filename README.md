@@ -1,8 +1,15 @@
 # Chat Application
 
-A multi-user multi-room chat application built with nodejs and socket.io.
+-A multi-user multi-room chat application built with nodejs and socket.io.
 
-<img src="chat-app.png" />
+-Apis to check about current state in a chat room/channel and likelihood of user sending message in the next 1 minute at any given time.
+
+
+## Live demo url
+ 
+ [link](https://symbl-chat.herokuapp.com/)
+
+<img src="./images/chat.png" />
 
 Features:
  - Multiple users can chat together in real-time
@@ -26,3 +33,4 @@ Open your browser and go to:
 Test case:
 
 `npm test`
+           - 2 apis are unit tested using libraries mocha and chai.

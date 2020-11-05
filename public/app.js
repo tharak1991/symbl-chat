@@ -1,17 +1,20 @@
+/**
+ * View logic
+ */
 
 
-var socket = io.connect("http://localhost:5000");
+let socket = io.connect("http://localhost:5000");
 
-var userlist = document.getElementById("userlist");
-var roomlist = document.getElementById("roomlist");
-var message = document.getElementById("message");
-var sendMessageBtn = document.getElementById("send");
-var createRoomBtn = document.getElementById("create-room");
-var messages = document.getElementById("msg");
-var chatDisplay = document.getElementById("chat-display");
+let userlist = document.getElementById("userlist");
+let roomlist = document.getElementById("roomlist");
+let message = document.getElementById("message");
+let sendMessageBtn = document.getElementById("send");
+let createRoomBtn = document.getElementById("create-room");
+let messages = document.getElementById("msg");
+let chatDisplay = document.getElementById("chat-display");
 
 
-var currentRoom = "general";
+let currentRoom = "general";
 
 
 // Send message on button click
@@ -33,12 +36,12 @@ createRoomBtn.addEventListener("click", function () {
 });
 
 
-socket.on("connect", function() {
+socket.on("connect", function () {
   socket.emit("createUser", prompt("Enter name: "));
 });
 
 
-socket.on("updateChat", function(username, data) {
+socket.on("updateChat", function (username, data) {
   if (username == "INFO") {
     messages.innerHTML +=
       "<p class='alert alert-warning w-100'>" + data + "</p>";
@@ -53,19 +56,19 @@ socket.on("updateChat", function(username, data) {
 });
 
 
-socket.on("updateUsers", function(usernames) {
+socket.on("updateUsers", function (usernames) {
   userlist.innerHTML = "";
 
-  for (var user in usernames) {
+  for (let user in usernames) {
     userlist.innerHTML += "<li>" + user + "</li>";
   }
 });
 
 
-socket.on("updateRooms", function(rooms, newRoom) {
+socket.on("updateRooms", function (rooms, newRoom) {
   roomlist.innerHTML = "";
 
-  for (var index in rooms) {
+  for (let index in rooms) {
     roomlist.innerHTML +=
       '<li class="rooms" id="' +
       rooms[index] +
@@ -95,5 +98,3 @@ function changeRoom(room) {
   }
 
 }
-
-

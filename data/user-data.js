@@ -1,30 +1,21 @@
-// class UserData {
-//     constructor(chat_data) {
-//         this.chat_data = chat_data;
-//     }
-// }
-
-// const dataInstance = new UserData();
-// Object.freeze(dataInstance);
-
-// module.exports = dataInstance ;
-
-
+/** 
+ * UserData model
+*/
 
 class UserData {
-     chat_data = [] ;
-    
+  chat_data = [];
 
-    constructor() {
-      if (!UserData._instance) {
-        UserData._instance = this;
-      }
-      return UserData._instance;
-    }
 
-    static getInstance() {
-      return this._instance;
+  constructor() {
+    if (!UserData._instance) {
+      UserData._instance = this;
     }
+    return UserData._instance;
   }
 
-  module.exports = UserData;
+  static getInstance() {
+    return this._instance;
+  }
+}
+
+module.exports = UserData;
