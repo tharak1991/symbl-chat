@@ -5,9 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha",
+    "pm2": "pm2 start processes.json --no-daemon",
     "start": "node server.js",
     "start:dev": "nodemon server.js"
-
   },
   "keywords": [
     "chat-app",
@@ -25,6 +25,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "morgan": "^1.9.1",
+    "pm2": "^4.5.0",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
